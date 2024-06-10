@@ -2,11 +2,15 @@
 
 # check input bucket name from env variable
 
-if[-z "$1" ]; then
+if [ -z "$1" ]; then
   echo "Please provide the bucket name eg:./create-bucket your-bucket-name"
   exit 1
 fi
 
 BUCKET_NAME=$1
 
-aws s3api
+aws s3api create-bucket \
+--bucket $BUCKET_NAME \
+--region ca-central-1 --create-bucket-configuration LocationConstraint=ca-central-1
+
+#--create-bucket-configuration LocationConstraint=ca-central-1 is used when region is not us-east-1.
