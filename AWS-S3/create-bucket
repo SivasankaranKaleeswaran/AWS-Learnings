@@ -11,6 +11,9 @@ BUCKET_NAME=$1
 
 aws s3api create-bucket \
 --bucket $BUCKET_NAME \
---region ca-central-1 --create-bucket-configuration LocationConstraint=ca-central-1
+--region ca-central-1 --create-bucket-configuration LocationConstraint=ca-central-1 \
+--query Location \
+--output text
 
+# query location will provide the url of the bucket and poutput format text will filter out the double quote
 #--create-bucket-configuration LocationConstraint=ca-central-1 is used when region is not us-east-1.
